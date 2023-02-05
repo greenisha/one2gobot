@@ -1,0 +1,4 @@
+github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.14 h1:1D8iv6zctEkhD1+MtuJ1R4TX71AsgHc56uo1xdv9vlw=
+github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.14/go.mod h1:r815fYWTudnU9JhtsJAxUtuV7QrSgKpChJkfTSMFpfg=
+github.com/joho/godotenv v1.5.0 h1:C/Vohk/9L1RCoS/UW2gfyi2N0EElSW3yb9zwi3PjosE=
+github.com/joho/godotenv v1.5.0/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
