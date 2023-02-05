@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"greenisha/one2gobot/model"
 	"log"
@@ -17,6 +18,11 @@ func (h Handler) SendReply(s string) error {
 	if err != nil {
 		log.Println(err.Error())
 		return fmt.Errorf("failed to find stations: %w", err)
+	}
+	if len(stations) == 0 {
+		h.Context.EffectiveMessage.Reply(h.Bot, "stations not found, Please try something else", &gotgbot.SendMessageOpts{
+			ParseMode: "html"})
+		return errors.New("no stations")
 	}
 	h.Context.EffectiveMessage.Reply(h.Bot, "Found this stations", &gotgbot.SendMessageOpts{
 		ParseMode:   "html",
@@ -53,6 +59,21 @@ func (h Handler) constructStations(s []model.Station) gotgbot.InlineKeyboardMark
 
 func constructButtonText(s model.Station) string {
 	var sb strings.Builder
+	if s.V == "bus" {
+		sb.WriteString("🚌 ")
+	} else if s.V == "van" {
+		sb.WriteString("🚐 ")
+	} else if s.V == "charter" {
+		sb.WriteString("🚕 ")
+	} else if s.V == "ferry" {
+		sb.WriteString("🛥 ")
+	} else if s.V == "avia" {
+		sb.WriteString("✈ ")
+	} else if s.V == "" {
+		sb.WriteString("✈ ")
+	} else {
+		sb.WriteString("📍 ")
+	}
 	sb.WriteString(s.Name)
 	sb.WriteString(" ")
 	sb.WriteString(s.Country)
