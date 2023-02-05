@@ -1,0 +1,14 @@
+version: "3"
+services:
+  bot:
+    container_name: one2gobot_server
+    image: greenisha/one2gobot:latest
+    environment:
+      RESTAPI: ${RESTAPI}
+      API_KEY: ${API_KEY}
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge
