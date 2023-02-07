@@ -6,6 +6,7 @@ import (
 	"errors"
 	"greenisha/one2gobot/model"
 	"net/http"
+	"net/url"
 	"time"
 )
 
@@ -16,7 +17,7 @@ type Client struct {
 // look for station
 func (c *Client) FindStation(search string) ([]model.Station, error) {
 	var out []model.Station
-	err := getJson(c.RestEndpoint+"/en/typeahead?ajax=1&short=1&pattern="+search, &out)
+	err := getJson(c.RestEndpoint+"/en/typeahead?ajax=1&short=1&pattern="+url.QueryEscape(search), &out)
 	if err != nil {
 		return []model.Station{}, err
 	}
@@ -25,7 +26,7 @@ func (c *Client) FindStation(search string) ([]model.Station, error) {
 
 func (c *Client) FindStationBySlug(slug string) (model.Station, error) {
 	var out []model.Station
-	err := getJson(c.RestEndpoint+"/en/typeahead?ajax=1&short=1&pattern="+slug, &out)
+	err := getJson(c.RestEndpoint+"/en/typeahead?ajax=1&short=1&pattern="+url.QueryEscape(slug), &out)
 	if err != nil {
 		return model.Station{}, err
 	}
